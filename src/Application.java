@@ -60,7 +60,9 @@ public class Application extends JFrame {
         //Double Buffered image
         dbImage = createImage(getWidth(), getHeight());
         dbg = dbImage.getGraphics();
+
         paintComponent(dbg);
+        
         g.drawImage(dbImage, 0, 0, this);
     }
 
@@ -81,6 +83,7 @@ public class Application extends JFrame {
                     continue;
                 }
             }
+
             if (obj instanceof Paddle)
             {
                 obj.logic(sceneObjects, MouseInfo.getPointerInfo().getLocation());
@@ -94,7 +97,7 @@ public class Application extends JFrame {
     }
     
     public void update() 
-    { //DON'T update the UI in this method. Game logic ONLY!
+    {
         seconds++;
     }
 }
