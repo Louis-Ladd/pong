@@ -33,9 +33,10 @@ public class Application extends JFrame {
 
 
         //Object init
-        sceneObjects.add(new Paddle(20, 250, 30, 100, Color.RED, false));
-        sceneObjects.add(new Paddle(SCREENWIDTH-50, 250, 30, 100, Color.RED, true));
-        sceneObjects.add(new Ball(50, 50, 50, 50, Color.BLUE));
+        //sceneObjects.add(new Paddle(20, 250, 30, 100, Color.RED, false));
+        //sceneObjects.add(new Paddle(SCREENWIDTH-50, 250, 30, 100, Color.RED, true));
+        for (int i = 0; i < 20; i++)
+            sceneObjects.add(new Ball(100+50*i, 200, 50, 50, Color.BLUE));
 
         seconds = 0;
         stop = false;

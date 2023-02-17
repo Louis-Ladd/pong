@@ -13,7 +13,18 @@ public class Ball extends Block
 		super(x,y,w,h,c);
 		isGone = false;
 		xVel = 5;
-		yVel = 4;
+		yVel = randomInt();
+	}
+
+	@Override
+	public void invertXVel()
+	{
+		xVel = -xVel;
+	}
+	@Override
+	public void invertYVel()
+	{
+		yVel = -yVel;
 	}
 
 	@Override
@@ -32,30 +43,36 @@ public class Ball extends Block
 	@Override
 	public void logic(ArrayList<Block> sceneObjects)
 	{
-		for (Block blk : sceneObjects)
+		for (Block block : sceneObjects)
 		{
-			if (this.equals(blk))
+			if (this.equals(block))
 			{continue;}
 
-			if (isOverlapping(blk))
+			if (isOverlapping(block))
 			{
-				if (x - blk.getX() < 0)
+				if (x - block.getX() < 0)
 				{
-					x -= 10; 
-					xVel = -xVel;
+					xVel = -(int)(xVel);
+					if (block instanceof Ball)
+						block.invertXVel();
 				}
-				if (x - blk.getX() > 0)
+				if (x - block.getX() > 0)
 				{
-					x += 10;
-					xVel = -xVel;
+					xVel = -(int)(xVel);
+					if (block instanceof Ball)
+						block.invertXVel();
 				}
-				if (y - blk.getY() > 0)
+				if (y - block.getY() > 0)
 				{
-					yVel = -yVel;
+					yVel = -(yVel + randomInt());
+					if (block instanceof Ball)
+						block.invertYVel();
 				}
-				if (y - blk.getY() < 0)
+				if (y - block.getY() < 0)
 				{
-					yVel = -yVel;
+					yVel = -(yVel + randomInt());
+					if (block instanceof Ball)
+						block.invertYVel();
 				}
 			}
 		}
@@ -73,12 +90,15 @@ public class Ball extends Block
 		//left
 		if (x + xVel <= 0)
 		{
-			isGone = true;
+			//isGone = true;
+			//sceneObjects.add(new Ball((int)(Application.SCREENWIDTH/2), (int)(Application.SCREENHEIGHT/2), 50, 50, Color.BLUE));
 			xVel = -xVel + randomInt();
 		}
 		//right
 		if (x + xVel > Application.SCREENWIDTH-width)
 		{
+			//isGone = true;
+			//sceneObjects.add(new Ball((int)(Application.SCREENWIDTH/2), (int)(Application.SCREENHEIGHT/2), 50, 50, Color.BLUE));
 			xVel = -xVel + randomInt();
 		}
 
@@ -91,12 +111,15 @@ public class Ball extends Block
 			yVel--;
 		}
 
+		xVel = (int)clamp(xVel, -10,10);
+		yVel = (int)clamp(yVel, -10, 10);
+
 		x += xVel;
 		y += yVel;
 	}
 
 	private int randomInt()
 	{
-		return new Random().nextInt(-2,2);
+		return new Random().nextInt(-5,5);
 	}
 }

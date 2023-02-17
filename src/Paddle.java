@@ -20,17 +20,37 @@ public class Paddle extends Block
 	}
 	public void logic(ArrayList<Block> sceneObjects, Point p)
 	{
-		if (isBot)
+		y = (int)clamp(y, 0, Application.SCREENHEIGHT-height);
+		for (Block blk : sceneObjects)
 		{
-			for (Block blk : sceneObjects)
+			if (!(blk instanceof Ball))
+			{continue;}
+
+			if (Math.abs(x + (int)(width/2) - blk.getX()) > 500)
 			{
-				if (blk instanceof Ball)
+				if (yVel != 0)
 				{
-					y = blk.getY()-height/2;
+					yVel += yVel < 0 ? 1 : -1;
 				}
+
+				continue;
 			}
-			return;
+			if (y+(int)(height/2)+yVel - blk.getY() < 0)
+			{
+				yVel ++;
+			}
+			else if (y+(int)(height/2)+yVel - blk.getY() > 0)
+			{
+				yVel --;
+			}
+			
 		}
+
+		y += clamp(yVel,-8,8);
+
+		if (isBot)
+		{return;}
+
 		y = (int)(p.getY() - height);
 	}
 

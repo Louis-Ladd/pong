@@ -38,6 +38,18 @@ public class Block
 		return height;
 	}
 
+	public void invertXVel()
+	{
+	}
+	public void invertYVel()
+	{
+	}
+
+	public static float clamp(float val, float min, float max) 
+	{
+    	return Math.max(min, Math.min(max, val));
+	}
+
 	public void draw(Graphics g)
 	{
 		g.setColor(color);
