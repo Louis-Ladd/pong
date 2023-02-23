@@ -55,24 +55,28 @@ public class Ball extends Block
 					xVel = -(int)(xVel);
 					if (block instanceof Ball)
 						block.invertXVel();
+					x -= Math.abs(xVel);
 				}
 				if (x - block.getX() > 0)
 				{
 					xVel = -(int)(xVel);
 					if (block instanceof Ball)
 						block.invertXVel();
+					x += Math.abs(xVel);
 				}
 				if (y - block.getY() > 0)
 				{
 					yVel = -(yVel + randomInt());
 					if (block instanceof Ball)
 						block.invertYVel();
+					y += Math.abs(yVel);
 				}
 				if (y - block.getY() < 0)
 				{
 					yVel = -(yVel + randomInt());
 					if (block instanceof Ball)
 						block.invertYVel();
+					y -= Math.abs(yVel);
 				}
 			}
 		}
@@ -90,15 +94,15 @@ public class Ball extends Block
 		//left
 		if (x + xVel <= 0)
 		{
-			//isGone = true;
-			//sceneObjects.add(new Ball((int)(Application.SCREENWIDTH/2), (int)(Application.SCREENHEIGHT/2), 50, 50, Color.BLUE));
+			isGone = true;
+			sceneObjects.add(new Ball((int)(Application.SCREENWIDTH/2), (int)(Application.SCREENHEIGHT/2), 50, 50, Color.BLUE));
 			xVel = -xVel + randomInt();
 		}
 		//right
 		if (x + xVel > Application.SCREENWIDTH-width)
 		{
-			//isGone = true;
-			//sceneObjects.add(new Ball((int)(Application.SCREENWIDTH/2), (int)(Application.SCREENHEIGHT/2), 50, 50, Color.BLUE));
+			isGone = true;
+			sceneObjects.add(new Ball((int)(Application.SCREENWIDTH/2), (int)(Application.SCREENHEIGHT/2), 50, 50, Color.BLUE));
 			xVel = -xVel + randomInt();
 		}
 

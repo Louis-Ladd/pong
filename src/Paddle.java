@@ -35,11 +35,11 @@ public class Paddle extends Block
 
 				continue;
 			}
-			if (y+(int)(height/2)+yVel - blk.getY() < 0)
+			if (y+(int)(height/2)+yVel - blk.getY() < 20)
 			{
 				yVel ++;
 			}
-			else if (y+(int)(height/2)+yVel - blk.getY() > 0)
+			else if (y+(int)(height/2)+yVel - blk.getY() > 20)
 			{
 				yVel --;
 			}
