@@ -1,3 +1,4 @@
+// Louis Harshman - Pong
 import java.util.Random;
 import java.util.ArrayList;
 import java.awt.Color;
@@ -5,7 +6,6 @@ import java.awt.Graphics;
 
 public class Ball extends Block
 {
-	private int xVel, yVel;
 	private boolean isGone;
 
 	public Ball(int x, int y, int w, int h, Color c)
@@ -52,58 +52,58 @@ public class Ball extends Block
 			{
 				if (x - block.getX() < 0)
 				{
-					xVel = -(int)(xVel);
+					xVel = -(int)(xVel+2);
 					if (block instanceof Ball)
 						block.invertXVel();
 					x -= Math.abs(xVel);
 				}
 				if (x - block.getX() > 0)
 				{
-					xVel = -(int)(xVel);
+					xVel = -(int)(xVel+2);
 					if (block instanceof Ball)
 						block.invertXVel();
 					x += Math.abs(xVel);
 				}
 				if (y - block.getY() > 0)
 				{
-					yVel = -(yVel + randomInt());
+					yVel = (yVel + (int)(block.getYVel()/2));
 					if (block instanceof Ball)
 						block.invertYVel();
-					y += Math.abs(yVel);
 				}
 				if (y - block.getY() < 0)
 				{
-					yVel = -(yVel + randomInt());
+					yVel = (yVel + (int)(block.getYVel()/2));
 					if (block instanceof Ball)
 						block.invertYVel();
-					y -= Math.abs(yVel);
 				}
 			}
 		}
 
-		//top
+		// top of screen
 		if (y + yVel <= 30)
 		{
-			yVel = -yVel + randomInt();
+			yVel = -yVel-1;
 		}
-		//bottom
+		// bottom of screen
 		if (y + yVel > Application.SCREENHEIGHT-height)
 		{
-			yVel = -yVel + randomInt();
+			yVel = -yVel-1;
 		}
-		//left
+		// left of screen
 		if (x + xVel <= 0)
 		{
 			isGone = true;
 			sceneObjects.add(new Ball((int)(Application.SCREENWIDTH/2), (int)(Application.SCREENHEIGHT/2), 50, 50, Color.BLUE));
-			xVel = -xVel + randomInt();
+			xVel = -xVel;
+			Application.rightScore ++;
 		}
-		//right
+		// right of screen
 		if (x + xVel > Application.SCREENWIDTH-width)
 		{
 			isGone = true;
 			sceneObjects.add(new Ball((int)(Application.SCREENWIDTH/2), (int)(Application.SCREENHEIGHT/2), 50, 50, Color.BLUE));
-			xVel = -xVel + randomInt();
+			xVel = -xVel;
+			Application.leftScore ++;
 		}
 
 		if(xVel > width)
@@ -115,8 +115,8 @@ public class Ball extends Block
 			yVel--;
 		}
 
-		xVel = (int)clamp(xVel, -10,10);
-		yVel = (int)clamp(yVel, -10, 10);
+		xVel = (int)clamp(xVel, -20,20);
+		yVel = (int)clamp(yVel, -20,20);
 
 		x += xVel;
 		y += yVel;

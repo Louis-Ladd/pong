@@ -1,11 +1,13 @@
+// Louis Harshman - Pong
 import java.util.ArrayList;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Point;
 
 public class Block
 {
+
 	protected int x,y,width,height;
+	protected int xVel, yVel;
 	protected Color color;
 
 	public Block(int x, int y, int w, int h, Color c)
@@ -18,36 +20,30 @@ public class Block
 	}
 
 	public boolean getIsGone()
-	{
-		return false;
-	}
+	{return false;}
 	public int getX()
-	{
-		return x;
-	}
+	{return x;}
 	public int getY()
-	{
-		return y;
-	}
+	{return y;}
+	public int getXVel()
+	{return xVel;}
+	public int getYVel()
+	{return yVel;}
 	public int getWidth()
-	{
-		return width;
-	}
+	{return width;}
 	public int getHeight()
-	{
-		return height;
-	}
+	{return height;}
+
+	public void setXVel(int xV)
+	{xVel = xV;}
+	public void SetYVel(int yV)
+	{yVel = yV;}
 
 	public void invertXVel()
 	{
 	}
 	public void invertYVel()
 	{
-	}
-
-	public static float clamp(float val, float min, float max) 
-	{
-    	return Math.max(min, Math.min(max, val));
 	}
 
 	public void draw(Graphics g)
@@ -62,9 +58,6 @@ public class Block
 	public void logic(ArrayList<Block> sceneObjects)
 	{
 	}
-	public void logic(ArrayList<Block> sceneObjects, Point p)
-	{
-	}
 
 	public String toString()
 	{
@@ -74,5 +67,10 @@ public class Block
 	protected boolean isOverlapping(Block obj2)
 	{
 		return (x < obj2.getX() + obj2.getWidth() && x + width > obj2.getX() && y < obj2.getY() + obj2.getHeight() && y + height > obj2.getY());
+	}
+	
+	public static float clamp(float val, float min, float max) 
+	{
+    	return Math.max(min, Math.min(max, val));
 	}
 }

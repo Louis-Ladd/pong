@@ -1,9 +1,10 @@
+// Louis Harshman - Pong
 public class Source
 {
-	//Entry point for the applictaion
+	// Entry point for the applictaion
 	public static void main(String[] args)
 	{
-		Application window = new Application();
+		Application window = new Application(true);
 		window.setVisible(true);
 	}
 }
